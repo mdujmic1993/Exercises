@@ -1,0 +1,29 @@
+---
+- name: Site
+  become: yes       # passwordless sudo enabled on localhost for user marijo
+  hosts: all
+  tasks: 
+  - name: Download the docker convenience script
+    get_url: 
+      url: https://get.docker.com
+      dest: /home/marijo/get-docker.sh 
+      mode: '0755'
+
+  - name: Install docker via the convenience script - not intended for prod environment! 
+    ansible.builtin.script: /home/marijo/get-docker.sh 
+    
+  - name: Set up syslog logging
+    ansible.builtin.copy:
+      src: /home/marijo/Documents/daemon.json
+      dest: /etc/docker/daemon.json
+      owner: root
+      group: root
+      mode: '0644'
+      backup: yes
+
+  - name: Restart docker
+    ansible.builtin.service: 
+      name: docker
+      state: restarted
+    
+...

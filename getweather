@@ -1,0 +1,20 @@
+import os
+from pyowm import OWM
+from pyowm.utils import config
+from pyowm.utils import timestamps
+
+env_api_key = os.environ.get('OWM_API_KEY')
+env_city = os.environ.get('OWM_CITY')
+
+owm = OWM(env_api_key)
+mgr = owm.weather_manager()
+
+# Search for current weather in env_city and get details
+observation = mgr.weather_at_place(env_city)
+w = observation.weather
+
+status = w.detailed_status           # 'clouds'
+temp = w.temperature('celsius')      # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
+humidity = w.humidity                # 87
+
+print("city=", env_city, ", description=", status, ", temp=", temp, ", humidity=", humidity)
