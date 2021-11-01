@@ -29,7 +29,7 @@ Following improvements can be implemented in the script:
 
 Built the docker image using the provided Dockerfile. The container is built from Python's Alpine Linux container due to resource conservation, and the packet manager's cache had been cleared out to use less disk space. The dockerfile instructs Docker to copy the scanner script to the home directory, install nmap and sets the entrypoint of the container to the script that's being executed by the Python interpreter. 
 
-![Exercise_2 1](https://user-images.githubusercontent.com/36381123/139753219-5ffbd578-189e-45a8-a0ab-4541112c97e1.png)
+![Exercise_2 2_pt1](https://user-images.githubusercontent.com/36381123/139753599-d2fdced2-7097-4bdb-ab61-68efff120fba.png)
 
 
 Wrote a scanner.yml Kubernetes manifest that runs the image periodically every 5 minutes as a cronjob. Installed minikube and applied the manifest. 
