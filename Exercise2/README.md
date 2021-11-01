@@ -22,5 +22,16 @@ Following improvements can be implemented in the script:
 - Input validation for the IP address/network range
 
 
+![Exercise_2 1](https://user-images.githubusercontent.com/36381123/139752761-5e9a827f-6c13-413d-a35e-0a2ce1ddec9c.png)
+
+
 ## 2.2 Kubernetize and deploy the scanner
 
+Built the docker image using the provided Dockerfile. The container is built from Python's Alpine Linux container due to resource conservation, and the packet manager's cache had been cleared out to use less disk space. The dockerfile instructs Docker to copy the scanner script to the home directory, install nmap and sets the entrypoint of the container to the script that's being executed by the Python interpreter. 
+
+![Exercise_2 1](https://user-images.githubusercontent.com/36381123/139753219-5ffbd578-189e-45a8-a0ab-4541112c97e1.png)
+
+
+Wrote a scanner.yml Kubernetes manifest that runs the image periodically every 5 minutes as a cronjob. Installed minikube and applied the manifest. 
+
+![Exercise_2 2_pt2](https://user-images.githubusercontent.com/36381123/139753478-0b26a85a-ce17-4a06-9d1a-03381bb5327b.png)
