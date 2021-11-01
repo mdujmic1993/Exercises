@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import os 
+import sys 
+import subprocess
+
+scanoutput = subprocess.run(["nmap", sys.argv[1], "-sT", "-p-", "-T4"], capture_output=True, text=True)
+file = open("scan1.txt", "w")
+file.write(str(scanoutput.stdout)) # cutting the first 3 lines would be beneficial for the output 
+file.close()
+
+while True:
+    scanoutput = subprocess.run(["nmap", sys.argv[1], "-sT", "-p-", "-T4"], capture_output=True, text=True)
+    file = open("scan2.txt", "w")
+    file.write(str(scanoutput.stdout)) # cut the lines here as well
+    file.close()
+    dif = os.system('diff scan1.txt scan2.txt | grep ">"') 
+    print(dif)
+
+    os.remove("scan1.txt")
+    os.rename("scan2.txt", "scan1.txt")

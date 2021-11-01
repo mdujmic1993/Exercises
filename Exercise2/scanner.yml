@@ -1,0 +1,17 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata: 
+  name: scanner-cj
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate: 
+    spec:
+      template:
+        spec:
+          containers: 
+          - name: pyscanner
+            image: mdujmic1993/python-scanner:exercise
+            args: ["127.0.0.1"]
+          restartPolicy: OnFailure
+...
